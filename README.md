@@ -73,13 +73,13 @@ Este proyecto muestra un visor de mapa interactivo integrado en una aplicación 
 
 ng build
 
-lo que crea los artefactos en el directorio `dist/`.[attached_file:1]  
-- El contenido de `dist/` puede desplegarse en cualquier servidor web estático (por ejemplo, Nginx, Apache o GitHub Pages) siguiendo las prácticas habituales de despliegue de aplicaciones Angular.[web:16]  
+lo que crea los artefactos en el directorio `dist/`.
+- El contenido de `dist/` puede desplegarse en cualquier servidor web estático (por ejemplo, Nginx, Apache o GitHub Pages) siguiendo las prácticas habituales de despliegue de aplicaciones Angular.
 
 ## Contribuir
 
-- Se recomienda crear ramas específicas para nuevas funcionalidades o correcciones antes de abrir un pull request.[web:13]  
-- Las contribuciones pueden incluir mejoras en la experiencia de usuario, nuevas opciones de filtrado de centros, optimización del rendimiento del mapa o documentación adicional.[web:13]  
+- Se recomienda crear ramas específicas para nuevas funcionalidades o correcciones antes de abrir un pull request.
+- Las contribuciones pueden incluir mejoras en la experiencia de usuario, nuevas opciones de filtrado de centros, optimización del rendimiento del mapa o documentación adicional.
 
 ## Licencia
 
