@@ -1,19 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
+// ✅ Import correcto del módulo de Snackbar
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { MapaCentrosComponent } from './components/mapa-centros/mapa-centros.component';
-import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapaCentrosComponent
+    MapaCentrosComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    BrowserAnimationsModule,  // ⚠️ IMPORTANTE: Este módulo es NECESARIO
+    FormsModule,
+    MatSnackBarModule  // ✅ Agregar aquí
   ],
   providers: [],
   bootstrap: [AppComponent]

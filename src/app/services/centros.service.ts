@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { centros } from '../../assets/data/centrosEducativos';
-import { ciclos } from '../../assets/data/ciclosFormativos';
+
+
+import { institutos } from '../../assets/data/institutos'; 
+import { ciclos } from '../../assets/data/asignacion';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,8 @@ import { ciclos } from '../../assets/data/ciclosFormativos';
 export class CentrosService {
 
   getCentros() {
-    return centros;
+    // Usamos la variable 'institutos'
+    return institutos;
   }
 
   getCiclos() {
@@ -17,15 +20,16 @@ export class CentrosService {
 
   // Métodos de filtrado reutilizables (opcional, ejemplo):
   getProvincias(): string[] {
-    return Array.from(new Set(centros.map(c => c.DTERRC)));
+    // Usamos 'institutos' en lugar de 'centros'
+    return Array.from(new Set(institutos.map(c => c.DTERRC))).sort();
   }
 
   getTiposCentro(): string[] {
-    return Array.from(new Set(centros.map(c => c.DGENRC)));
+    return Array.from(new Set(institutos.map(c => c.DGENRC))).sort();
   }
 
   getMunicipios(provincia: string): string[] {
     if (!provincia) return [];
-    return Array.from(new Set(centros.filter(c => c.DTERRC === provincia).map(c => c.DMUNIC)));
+    return Array.from(new Set(institutos.filter(c => c.DTERRC === provincia).map(c => c.DMUNIC))).sort();
   }
 }

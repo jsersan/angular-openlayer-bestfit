@@ -1,42 +1,311 @@
-<!-- ✅ NUEVO: Header con logo y enlace -->
+<!-- mapa-centros.component.html -->
 <header class="app-header">
   <div class="header-content">
-    <a href="/" class="logo">educafind</a>
-    <a href="/" class="nav-link">Inicio</a>
+    <a href="/angular/openlayer/ciclos/" class="logo">Buscador de Centros Educativos FP</a>
+    <a (click)="irAInicio()" class="nav-link" style="cursor: pointer;">Inicio</a>
   </div>
   <div class="header-title">
-    &copy; Buscador de Centros OpenLayer Euskadi ajustable al contenido
+    &copy; Txema Serrano Sánchez
   </div>
 </header>
 
-<div class="main-container">
+<div class="mapa-centros-container">
   <div class="sidebar">
-    <div class="filtro-titulo">Configure filtros</div>
-    <select class="flat-select" [(ngModel)]="provinciaSeleccionada" (change)="actualizarMunicipios()">
-      <option value="">Seleccione provincia</option>
-      <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
-    </select>
-    
-    <select class="flat-select" [(ngModel)]="municipioSeleccionado" [disabled]="!municipioEnabled" (change)="actualizarMapa(true)">
-      <option value="">Seleccione municipio</option>
-      <option *ngFor="let municipio of municipios" [value]="municipio">{{municipio}}</option>
-    </select>
-    
-    <select class="flat-select" [(ngModel)]="tipoCentroSeleccionado" (change)="actualizarMapa()">
-      <option value="">Seleccione tipo de centro</option>
-      <option *ngFor="let tipo of tiposCentro" [value]="tipo.value">
-        {{ tipo.label }}
-      </option>
-    </select>
-
-    <select class="flat-select" [(ngModel)]="moduloSeleccionado" (change)="actualizarMapa(false)">
-      <option value="">Seleccione ciclo formativo</option>
-      <option *ngFor="let ciclo of ciclos" [value]="ciclo.codcicl">{{ciclo.nom}}</option>
-    </select>
+    <div class="filters">
+      <!-- Provincia -->
+      <select [(ngModel)]="provinciaSeleccionada" (change)="actualizarMunicipios()">
+        <option value="">Seleccione Provincia</option>
+        <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
+      </select>
+      
+      <!-- Municipio -->
+      <select [(ngModel)]="municipioSeleccionado" 
+              [disabled]="!municipioEnabled"
+              (change)="actualizarFamilias()">
+        <option value="">Seleccione Municipio</option>
+        <option *ngFor="let muni of municipios" [value]="muni">{{muni}}</option>
+      </select>
+      
+      <!-- Tipo de Centro -->
+      <select [(ngModel)]="tipoCentroSeleccionado" (change)="actualizarMapa('tipo')">
+        <option value="">Seleccione Tipo de Centro</option>
+        <option *ngFor="let tipo of tiposCentro" [value]="tipo.value">{{tipo.label}}</option>
+      </select>
+      
+      <!-- Grado del Ciclo -->
+      <select [(ngModel)]="gradoSeleccionado" (change)="actualizarFamiliasPorGrado()">
+        <option value="">Seleccione Grado del Ciclo</option>
+        <option *ngFor="let grado of gradosCiclo" [value]="grado.value">{{grado.label}}</option>
+      </select>
+      
+      <!-- Familia Profesional -->
+      <select [(ngModel)]="familiaSeleccionada" (change)="actualizarCiclos()">
+        <option value="">Seleccione Familia profesional</option>
+        <option *ngFor="let fam of familiasFiltradas" [value]="fam">{{fam}}</option>
+      </select>
+      
+      <!-- Ciclo -->
+      <select [(ngModel)]="cicloSeleccionado" 
+              [disabled]="ciclosFiltrados.length === 0"
+              (change)="actualizarMapa('ciclo')">
+        <option value="">Seleccione Ciclo</option>
+        <option *ngFor="let ciclo of ciclosFiltrados" [value]="ciclo.codcicl">{{ciclo.nom}}</option>
+      </select>
+      
+      <!-- Botón de limpiar filtros -->
+      <button *ngIf="provinciaSeleccionada || municipioSeleccionado || tipoCentroSeleccionado || gradoSeleccionado || familiaSeleccionada || cicloSeleccionado"
+              (click)="limpiarFiltros()"
+              class="btn-limpiar">
+        Limpiar Filtros
+      </button>
+    </div>
   </div>
   
   <div class="main-map">
-    <div id="map"></div>
-    <div id="popup" class="ol-popup"></div>
+    <div id="map" class="mapdiv" (mousemove)="onMapMouseMove($event)"></div>
+    
+    <!-- Popup con pestañas -->
+    <div id="popup" class="ol-popup" *ngIf="popupVisible" 
+         [style.left.px]="popupPosition.x"
+         [style.top.px]="popupPosition.y"
+         [class]="popupClass">
+      <button class="popup-closer" (click)="cerrarPopup()">×</button>
+      
+      <div class="popup-header">
+        <img [src]="getImagenCentro(centroSeleccionado.CCEN)" 
+             [alt]="centroSeleccionado.NOM"
+             class="centro-imagen"
+             (error)="onImageError($event)">
+        <div class="centro-info-header">
+          <span class="centro-codigo">{{centroSeleccionado.DGENRC}} - {{centroSeleccionado.CCEN}}</span>
+          <h3 class="centro-nombre">{{centroSeleccionado.NOME || centroSeleccionado.NOM}}</h3>
+        </div>
+      </div>
+      
+      <div class="popup-tabs">
+        <button 
+          *ngFor="let tab of tabs" 
+          [class.active]="tabActiva === tab.id"
+          (click)="cambiarTab(tab.id)"
+          class="tab-button">
+          {{tab.label}}
+        </button>
+      </div>
+      
+      <div class="popup-content" [style.max-height.px]="popupContentHeight">
+        <!-- PESTAÑA: INFORMACIÓN DE CONTACTO -->
+        <div *ngIf="tabActiva === 'contacto'" class="tab-panel">
+          <div class="info-row" *ngIf="centroSeleccionado.DOMI">
+            <strong>Dirección/Helbidea:</strong>
+            <span>{{centroSeleccionado.DOMI}}</span>
+          </div>
+          <div class="info-row" *ngIf="centroSeleccionado.CPOS">
+            <strong>Código Postal:</strong>
+            <span>{{centroSeleccionado.CPOS}}</span>
+          </div>
+          <div class="info-row" *ngIf="centroSeleccionado.DMUNIC">
+            <strong>Municipio/Udalerria:</strong>
+            <span>{{centroSeleccionado.DMUNIC}}</span>
+          </div>
+          <div class="info-row" *ngIf="centroSeleccionado.DTERRC">
+            <strong>Provincia/Probintzia:</strong>
+            <span>{{centroSeleccionado.DTERRC}}</span>
+          </div>
+          <div class="info-row" *ngIf="centroSeleccionado.TEL1">
+            <strong>Teléfono:</strong>
+            <a [href]="'tel:' + centroSeleccionado.TEL1">{{centroSeleccionado.TEL1}}</a>
+          </div>
+          <div class="info-row" *ngIf="centroSeleccionado.EMAIL">
+            <strong>Email:</strong>
+            <a [href]="'mailto:' + centroSeleccionado.EMAIL">{{centroSeleccionado.EMAIL}}</a>
+          </div>
+          <div class="info-row" *ngIf="centroSeleccionado.PAGINA">
+            <strong>Página Web:</strong>
+            <a [href]="centroSeleccionado.PAGINA" target="_blank" rel="noopener">Visitar sitio web ↗</a>
+          </div>
+        </div>
+        
+        <!-- PESTAÑA: OFERTA EDUCATIVA -->
+        <div *ngIf="tabActiva === 'oferta'" class="tab-panel">
+          <div class="oferta-resumen">
+            <h4>Oferta Educativa</h4>
+            <div class="stats-grid">
+              <div class="stat-item" 
+                   [class.clickable]="getTotalCiclos('basicos') > 0"
+                   [title]="getTotalCiclos('basicos') > 0 ? 'Clic para ver ciclos de FP Básica' : 'No hay ciclos de FP Básica'"
+                   (click)="irAPestanaPorGrado('basicos')">
+                <span class="stat-number">{{getTotalCiclos('basicos')}}</span>
+                <span class="stat-label">FP Básica</span>
+              </div>
+              <div class="stat-item" 
+                   [class.clickable]="getTotalCiclos('medios') > 0"
+                   [title]="getTotalCiclos('medios') > 0 ? 'Clic para ver ciclos de Grado Medio' : 'No hay ciclos de Grado Medio'"
+                   (click)="irAPestanaPorGrado('medios')">
+                <span class="stat-number">{{getTotalCiclos('medios')}}</span>
+                <span class="stat-label">Grado Medio</span>
+              </div>
+              <div class="stat-item" 
+                   [class.clickable]="getTotalCiclos('superiores') > 0"
+                   [title]="getTotalCiclos('superiores') > 0 ? 'Clic para ver ciclos de Grado Superior' : 'No hay ciclos de Grado Superior'"
+                   (click)="irAPestanaPorGrado('superiores')">
+                <span class="stat-number">{{getTotalCiclos('superiores')}}</span>
+                <span class="stat-label">Grado Superior</span>
+              </div>
+            </div>
+            
+            <div class="familias-ofertadas" *ngIf="familiasCentro.length > 0">
+              <strong>Familias Profesionales:</strong>
+              <div class="familias-chips">
+                <span class="familia-chip" *ngFor="let familia of familiasCentro">{{familia}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- PESTAÑA: CICLOS FP BÁSICA -->
+        <div *ngIf="tabActiva === 'basico'" class="tab-panel ciclos-list">
+          <div class="empty-state" *ngIf="getTotalCiclos('basicos') === 0">
+            <p>No hay ciclos de Formación Profesional Básica en este centro</p>
+          </div>
+          
+          <div class="ciclo-card" *ngFor="let ciclo of ciclosCentro.basicos">
+            <div class="ciclo-header">
+              <span class="ciclo-abr">{{ciclo.abr}}</span>
+              <span class="ciclo-modalidad" [class]="'modalidad-' + ciclo.modalidad.toLowerCase()">
+                {{ciclo.modalidad}}
+              </span>
+            </div>
+            <h5 class="ciclo-nombre">{{ciclo.nom}}</h5>
+            <p class="ciclo-nombre-euskera">{{ciclo.nomEuskera}}</p>
+            <div class="ciclo-footer">
+              <span class="ciclo-familia">{{ciclo.familia}}</span>
+              <span class="ciclo-duracion">{{ciclo.duracion}}h</span>
+            </div>
+            <div class="ciclo-idiomas" *ngIf="ciclo.idiomas && ciclo.idiomas.length > 0">
+              <span class="idioma-badge" *ngFor="let idioma of ciclo.idiomas">{{idioma}}</span>
+            </div>
+            <!-- Botón para ver el DCB -->
+            <div class="ciclo-actions">
+              <button class="btn-dcb" (click)="abrirDCB(ciclo, $event)" title="Ver Diseño Curricular Base">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                Ver DCB
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- PESTAÑA: CICLOS GRADO MEDIO -->
+        <div *ngIf="tabActiva === 'medio'" class="tab-panel ciclos-list">
+          <div class="empty-state" *ngIf="getTotalCiclos('medios') === 0">
+            <p>No hay ciclos de Grado Medio en este centro</p>
+          </div>
+          
+          <div class="ciclo-card" *ngFor="let ciclo of ciclosCentro.medios">
+            <div class="ciclo-header">
+              <span class="ciclo-abr">{{ciclo.abr}}</span>
+              <span class="ciclo-modalidad" [class]="'modalidad-' + ciclo.modalidad.toLowerCase()">
+                {{ciclo.modalidad}}
+              </span>
+            </div>
+            <h5 class="ciclo-nombre">{{ciclo.nom}}</h5>
+            <p class="ciclo-nombre-euskera">{{ciclo.nomEuskera}}</p>
+            <div class="ciclo-footer">
+              <span class="ciclo-familia">{{ciclo.familia}}</span>
+              <span class="ciclo-duracion">{{ciclo.duracion}}h</span>
+            </div>
+            <div class="ciclo-idiomas" *ngIf="ciclo.idiomas && ciclo.idiomas.length > 0">
+              <span class="idioma-badge" *ngFor="let idioma of ciclo.idiomas">{{idioma}}</span>
+            </div>
+            <!-- Botón para ver el DCB -->
+            <div class="ciclo-actions">
+              <button class="btn-dcb" (click)="abrirDCB(ciclo, $event)" title="Ver Diseño Curricular Base">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                Ver DCB
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- PESTAÑA: CICLOS GRADO SUPERIOR -->
+        <div *ngIf="tabActiva === 'superior'" class="tab-panel ciclos-list">
+          <div class="empty-state" *ngIf="getTotalCiclos('superiores') === 0">
+            <p>No hay ciclos de Grado Superior en este centro</p>
+          </div>
+          
+          <div class="ciclo-card" *ngFor="let ciclo of ciclosCentro.superiores">
+            <div class="ciclo-header">
+              <span class="ciclo-abr">{{ciclo.abr}}</span>
+              <span class="ciclo-modalidad" [class]="'modalidad-' + ciclo.modalidad.toLowerCase()">
+                {{ciclo.modalidad}}
+              </span>
+            </div>
+            <h5 class="ciclo-nombre">{{ciclo.nom}}</h5>
+            <p class="ciclo-nombre-euskera">{{ciclo.nomEuskera}}</p>
+            <div class="ciclo-footer">
+              <span class="ciclo-familia">{{ciclo.familia}}</span>
+              <span class="ciclo-duracion">{{ciclo.duracion}}h</span>
+            </div>
+            <div class="ciclo-idiomas" *ngIf="ciclo.idiomas && ciclo.idiomas.length > 0">
+              <span class="idioma-badge" *ngFor="let idioma of ciclo.idiomas">{{idioma}}</span>
+            </div>
+            <!-- Botón para ver el DCB -->
+            <div class="ciclo-actions">
+              <button class="btn-dcb" (click)="abrirDCB(ciclo, $event)" title="Ver Diseño Curricular Base">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                Ver DCB
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+
+<!-- Modal de advertencia -->
+<div class="modal-overlay" *ngIf="mostrarModalAdvertencia" (click)="cerrarModalAdvertencia()">
+  <div class="modal-advertencia" (click)="$event.stopPropagation()">
+    <div class="modal-icon">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+    </div>
+    <h3>No se encontraron centros</h3>
+    <p>{{mensajeModalAdvertencia}}</p>
+    <div class="modal-actions">
+      <button class="btn-limpiar-modal" (click)="limpiarFiltrosDesdeModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 6h18"></path>
+          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+          <line x1="10" y1="11" x2="10" y2="17"></line>
+          <line x1="14" y1="11" x2="14" y2="17"></line>
+        </svg>
+        Limpiar Filtros
+      </button>
+      <button class="btn-cerrar-modal" (click)="cerrarModalAdvertencia()">
+        Entendido
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Tooltip de hover -->
+<div *ngIf="tooltipVisible"
+     class="map-tooltip"
+     [style.left.px]="tooltipX"
+     [style.top.px]="tooltipY"
+     [innerHTML]="tooltipContent"
+     style="position: fixed; pointer-events: none; z-index: 50000;">
 </div>
