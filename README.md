@@ -23,23 +23,23 @@ Este proyecto muestra un visor de mapa interactivo integrado en una aplicación 
 
 1. Clonar el repositorio:  
 
-git clone https://github.com/jsersan/angular-openlayer-bestfit.git
+    git clone https://github.com/jsersan/angular-openlayer-bestfit.git
 
 2. Entrar en el directorio del proyecto:
 
-cd angular-openlayer-bestfit
+    cd angular-openlayer-bestfit
 
 3. Instalar dependencias:
 
-npm install
+    npm install
 
 4. - Iniciar el servidor de desarrollo:
   
-ng serve
+    ng serve
 
 5.- Nuestro mapa estará en:
 
-http://localhost:4200
+    http://localhost:4200
 
 - La aplicación se recargará automáticamente al modificar los archivos fuente del proyecto.[attached_file:1]  
 
