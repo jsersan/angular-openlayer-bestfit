@@ -1,23 +1,23 @@
 # angular-openlayer-bestfit
 
-Aplicación web desarrollada con Angular que permite buscar y visualizar en un mapa los centros de Formación Profesional (FP) de la Comunidad Autónoma Vasca (CAV) utilizando OpenLayers como motor cartográfico.[attached_file:1]
+Aplicación web desarrollada con Angular que permite buscar y visualizar en un mapa los centros de Formación Profesional (FP) de la Comunidad Autónoma Vasca (CAV) utilizando OpenLayers como motor cartográfico.
 
 ## Descripción general
 
-Este proyecto muestra un visor de mapa interactivo integrado en una aplicación Angular, donde se representan los centros de FP de la CAV mediante capas geográficas configuradas con OpenLayers.[attached_file:1] La interfaz permite buscar, filtrar y centrar el mapa sobre los centros que mejor se ajustan a los criterios del usuario (best fit), facilitando la exploración de la oferta formativa en el territorio.[attached_file:1]
+Este proyecto muestra un visor de mapa interactivo integrado en una aplicación Angular, donde se representan los centros de FP de la CAV mediante capas geográficas configuradas con OpenLayers.La interfaz permite buscar, filtrar y centrar el mapa sobre los centros que mejor se ajustan a los criterios del usuario (best fit), facilitando la exploración de la oferta formativa en el territorio.
 
 ## Características principales
 
-- Aplicación SPA creada con Angular CLI (versión 15.0.2) siguiendo la estructura estándar de módulos y componentes.[attached_file:1]  
-- Integración de OpenLayers para mostrar mapas, capas vectoriales y controles de navegación.[attached_file:1]  
-- Búsqueda de centros de FP de la CAV con representación geográfica sobre el mapa y ajuste automático de la vista a los resultados.[attached_file:1]  
-- Uso de TypeScript, SCSS y HTML como tecnologías principales del frontend.[attached_file:1]  
+- Aplicación SPA creada con Angular CLI (versión 15.0.2) siguiendo la estructura estándar de módulos y componentes.
+- Integración de OpenLayers para mostrar mapas, capas vectoriales y controles de navegación.
+- Búsqueda de centros de FP de la CAV con representación geográfica sobre el mapa y ajuste automático de la vista a los resultados.
+- Uso de TypeScript, SCSS y HTML como tecnologías principales del frontend.
 
 ## Requisitos previos
 
-- Node.js y npm instalados en el sistema (versión compatible con Angular 15).[web:16]  
+- Node.js y npm instalados en el sistema (versión compatible con Angular 15).
 - Angular CLI instalado globalmente para ejecutar y compilar el proyecto:  
-  `npm install -g @angular/cli`.[web:16]  
+  `npm install -g @angular/cli`.
 
 ## Instalación
 
@@ -41,31 +41,31 @@ Este proyecto muestra un visor de mapa interactivo integrado en una aplicación 
 
     http://localhost:4200
 
-- La aplicación se recargará automáticamente al modificar los archivos fuente del proyecto.[attached_file:1]  
+- La aplicación se recargará automáticamente al modificar los archivos fuente del proyecto.
 
 ## Scripts disponibles
 
-- `ng serve`: Levanta el servidor de desarrollo en `localhost:4200`.[attached_file:1]  
-- `ng build`: Genera la build de producción en el directorio `dist/`.[attached_file:1]  
-- `ng test`: Ejecuta los tests unitarios con Karma.[attached_file:1]  
-- `ng e2e`: Ejecuta las pruebas end-to-end (requiere configurar un framework de e2e compatible previamente).[attached_file:1]  
+- `ng serve`: Levanta el servidor de desarrollo en `localhost:4200`.
+- `ng build`: Genera la build de producción en el directorio `dist/`.
+- `ng test`: Ejecuta los tests unitarios con Karma.
+- `ng e2e`: Ejecuta las pruebas end-to-end (requiere configurar un framework de e2e compatible previamente).
 
 ## Estructura del proyecto
 
-- `src/app/`: Contiene los componentes y módulos de Angular, incluyendo el componente principal que integra el mapa de OpenLayers y la lógica de búsqueda.[attached_file:1]  
-- `src/assets/`: Recursos estáticos que pueden incluir configuraciones, iconos o datos geoespaciales necesarios para el mapa.[attached_file:1]  
-- Archivos de configuración principales: `angular.json`, `tsconfig.json`, `package.json`, donde se gestionan la configuración de Angular, TypeScript y las dependencias.[attached_file:1]  
+- `src/app/`: Contiene los componentes y módulos de Angular, incluyendo el componente principal que integra el mapa de OpenLayers y la lógica de búsqueda.
+- `src/assets/`: Recursos estáticos que pueden incluir configuraciones, iconos o datos geoespaciales necesarios para el mapa.
+- Archivos de configuración principales: `angular.json`, `tsconfig.json`, `package.json`, donde se gestionan la configuración de Angular, TypeScript y las dependencias.
 
 ## Tecnologías utilizadas
 
-- Angular 15: Framework principal para la construcción de la SPA y gestión de componentes.[attached_file:1]  
-- OpenLayers: Librería JavaScript para la visualización de mapas y capas geoespaciales en el navegador.[attached_file:1]  
-- Lenguajes: TypeScript (~85 % del código), SCSS, HTML y JavaScript según estadísticas del repositorio.[attached_file:1]  
+- Angular 15: Framework principal para la construcción de la SPA y gestión de componentes.
+- OpenLayers: Librería JavaScript para la visualización de mapas y capas geoespaciales en el navegador.
+- Lenguajes: TypeScript (~85 % del código), SCSS, HTML y JavaScript según estadísticas del repositorio. 
 
 ## Pruebas
 
-- Las pruebas unitarias se ejecutan con `ng test` utilizando Karma como test runner, siguiendo la configuración generada por Angular CLI.[attached_file:1]  
-- Las pruebas end-to-end se pueden configurar añadiendo un paquete de e2e (como Cypress o Protractor) y luego ejecutando `ng e2e`.[attached_file:1]  
+- Las pruebas unitarias se ejecutan con `ng test` utilizando Karma como test runner, siguiendo la configuración generada por Angular CLI.
+- Las pruebas end-to-end se pueden configurar añadiendo un paquete de e2e (como Cypress o Protractor) y luego ejecutando `ng e2e`.
 
 ## Despliegue
 
