@@ -1,0 +1,98 @@
+{
+  "header": {
+    "title": "Buscador de Centros Educativos FP",
+    "inicio": "Inicio",
+    "copyright": "© Txema Serrano Sánchez"
+  },
+  "filters": {
+    "provincia": "Seleccione Provincia",
+    "municipio": "Seleccione Municipio",
+    "tipoCentro": "Seleccione Tipo de Centro",
+    "grado": "Seleccione Grado del Ciclo",
+    "familia": "Seleccione Familia profesional",
+    "ciclo": "Seleccione Ciclo",
+    "limpiar": "Limpiar Filtros"
+  },
+  "grados": {
+    "basico": "Formación Profesional Básica",
+    "medio": "Grado Medio",
+    "superior": "Grado Superior"
+  },
+  "tabs": {
+    "contacto": "Información de Contacto",
+    "oferta": "Oferta Educativa",
+    "basico": "FP Básica",
+    "medio": "Ciclos Grado Medio",
+    "superior": "Ciclos Grado Superior"
+  },
+  "contacto": {
+    "direccion": "Dirección/Helbidea",
+    "codigoPostal": "Código Postal",
+    "municipio": "Municipio/Udalerria",
+    "provincia": "Provincia/Probintzia",
+    "telefono": "Teléfono",
+    "email": "Email",
+    "web": "Página Web",
+    "visitarWeb": "Visitar sitio web ↗"
+  },
+  "oferta": {
+    "titulo": "Oferta Educativa",
+    "familias": "Familias Profesionales",
+    "noCiclosBasica": "No hay ciclos de Formación Profesional Básica en este centro",
+    "noCiclosMedio": "No hay ciclos de Grado Medio en este centro",
+    "noCiclosSuperior": "No hay ciclos de Grado Superior en este centro",
+    "verBasica": "Clic para ver ciclos de FP Básica",
+    "verMedio": "Clic para ver ciclos de Grado Medio",
+    "verSuperior": "Clic para ver ciclos de Grado Superior"
+  },
+  "ciclo": {
+    "verDCB": "Ver DCB",
+    "duracion": "h"
+  },
+  "modal": {
+    "noResultados": "No se encontraron centros",
+    "entendido": "Entendido"
+  },
+  "mensajes": {
+    "cicloIncompatible": "El ciclo \"{{ciclo}}\" es de {{gradoCiclo}}, no de {{gradoSeleccionado}}",
+    "cerrar": "Cerrar",
+    "sinCoordenadasValidas": "Los centros encontrados no tienen coordenadas válidas"
+  },
+  "tiposCentro": {
+    "CIFP": "Centro Integrado de Formación Profesional",
+    "CIFPD": "Centro Integrado de FP a Distancia",
+    "CPES": "Centro Privado de Educación Secundaria",
+    "CPEPS": "Centro Privado de Educación Infantil, Primaria y Secundaria",
+    "CPFPB": "Centro Privado de Formación Profesional Básica",
+    "CPEIPS": "Centro Privado de Educación Infantil, Primaria y Secundaria",
+    "IES": "Instituto de Educación Secundaria",
+    "IMFPB": "Instituto Municipal de Formación Profesional Básica",
+    "IMFPB_2": "Instituto de Formación Profesional de Nivel Medio y Básico"
+  },
+  "familiasProfesionales": {
+    "AFD": "Actividades Físicas y Deportivas",
+    "ADG": "Administración y Gestión",
+    "AGA": "Agraria",
+    "ARG": "Artes Gráficas",
+    "AAN": "Artes y Artesanías",
+    "COM": "Comercio y Marketing",
+    "EOC": "Edificación y Obra Civil",
+    "ELE": "Electricidad y Electrónica",
+    "ENA": "Energía y Agua",
+    "FME": "Fabricación Mecánica",
+    "HOT": "Hostelería y Turismo",
+    "IMP": "Imagen Personal",
+    "IMS": "Imagen y Sonido",
+    "INA": "Industrias Alimentarias",
+    "IFC": "Informática y Comunicaciones",
+    "IMA": "Instalación y Mantenimiento",
+    "MMC": "Madera, Mueble y Corcho",
+    "MAP": "Marítimo Pesquera",
+    "QUI": "Química",
+    "SAN": "Sanidad",
+    "SEA": "Seguridad y Medio Ambiente",
+    "SSC": "Servicios Socioculturales y a la Comunidad",
+    "TCP": "Textil, Confección y Piel",
+    "TMV": "Transporte y Mantenimiento de Vehículos"
+  }
+}

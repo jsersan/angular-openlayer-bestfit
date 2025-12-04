@@ -1,0 +1,99 @@
+{
+  "header": {
+    "title": "LH Ikastetxe Bilatzailea",
+    "inicio": "Hasiera",
+    "copyright": "© Txema Serrano Sánchez"
+  },
+  "filters": {
+    "provincia": "Probintzia aukeratu",
+    "municipio": "Udalerria aukeratu",
+    "tipoCentro": "Ikastetxe mota aukeratu",
+    "grado": "Zikloaren maila aukeratu",
+    "familia": "Lanbide familia aukeratu",
+    "ciclo": "Zikloa aukeratu",
+    "limpiar": "Iragazkiak garbitu"
+  },
+  "grados": {
+    "basico": "Oinarrizko Lanbide Heziketa",
+    "medio": "Erdi Maila",
+    "superior": "Goi Maila"
+  },
+  "tabs": {
+    "contacto": "Harremanetarako Informazioa",
+    "oferta": "Hezkuntza Eskaintza",
+    "basico": "Oinarrizko LH",
+    "medio": "Erdi Mailako Zikloak",
+    "superior": "Goi Mailako Zikloak"
+  },
+  "contacto": {
+    "direccion": "Helbidea/Dirección",
+    "codigoPostal": "Posta kodea",
+    "municipio": "Udalerria/Municipio",
+    "provincia": "Probintzia/Provincia",
+    "telefono": "Telefonoa",
+    "email": "Emaila",
+    "web": "Webgunea",
+    "visitarWeb": "Webgunea bisitatu ↗"
+  },
+  "oferta": {
+    "titulo": "Hezkuntza Eskaintza",
+    "familias": "Lanbide Familiak",
+    "noCiclosBasica": "Ez dago Oinarrizko Lanbide Heziketako ziklorik ikastetxe honetan",
+    "noCiclosMedio": "Ez dago Erdi Mailako ziklorik ikastetxe honetan",
+    "noCiclosSuperior": "Ez dago Goi Mailako ziklorik ikastetxe honetan",
+    "verBasica": "Klik egin Oinarrizko LH zikloak ikusteko",
+    "verMedio": "Klik egin Erdi Mailako zikloak ikusteko",
+    "verSuperior": "Klik egin Goi Mailako zikloak ikusteko"
+  },
+  "ciclo": {
+    "verDCB": "KOD ikusi",
+    "duracion": "o"
+  },
+  "modal": {
+    "noResultados": "Ez da ikastetxerik aurkitu",
+    "entendido": "Ulertuta"
+  },
+  "mensajes": {
+    "cicloIncompatible": "\"{{ciclo}}\" zikloa {{gradoCiclo}} mailakoa da, ez {{gradoSeleccionado}}",
+    "cerrar": "Itxi",
+    "sinCoordenadasValidas": "Aurkitutako ikastetxeek ez dute koordenatu baliodunik"
+  },
+  "tiposCentro": {
+    "CIFP": "Lanbide Heziketako Ikastetxe Integratua",
+    "CIFPD": "Urrutiko LH Ikastetxe Integratua",
+    "CPES": "Bigarren Hezkuntzako Ikastetxe Pribatua",
+    "CPEPS": "Haur, Lehen eta Bigarren Hezkuntzako Ikastetxe Pribatua",
+    "CPFPB": "Oinarrizko Lanbide Heziketako Ikastetxe Pribatua",
+    "CPEIPS": "Haur, Lehen eta Bigarren Hezkuntzako Ikastetxe Pribatua",
+    "IES": "Bigarren Hezkuntzako Institutua",
+    "IMFPB": "Oinarrizko LHko Udal Institutua",
+    "IMFPB_2": "Maila ertaineko eta oinarrizko LHko Institutua"
+  },
+  "familiasProfesionales": {
+    "AFD": "Jarduera Fisiko eta Kirolak",
+    "ADG": "Administrazioa eta Kudeaketa",
+    "AGA": "Nekazaritza",
+    "ARG": "Arte Grafikoak",
+    "AAN": "Arteak eta Artisautza",
+    "COM": "Merkataritza eta Marketina",
+    "EOC": "Eraikuntza eta Obra Zibila",
+    "ELE": "Elektrizitatea eta Elektronika",
+    "ENA": "Energia eta Ura",
+    "FME": "Fabrikazio Mekanikoa",
+    "HOT": "Ostatatzea eta Turismoa",
+    "IMP": "Irudi Pertsonala",
+    "IMS": "Irudi eta Soinua",
+    "INA": "Elikagaien Industriak",
+    "IFC": "Informatika eta Komunikazioak",
+    "IMA": "Instalazioa eta Mantentzea",
+    "MMC": "Egurra, Altzariak eta Kortxoa",
+    "MAP": "Itsasoko Arrantza",
+    "QUI": "Kimika",
+    "SAN": "Osasuna",
+    "SEA": "Segurtasuna eta Ingurumena",
+    "SSC": "Gizarte eta Kultura Zerbitzuak",
+    "TCP": "Ehungintza, Jantzigintza eta Azala",
+    "TMV": "Garraioa eta Ibilgailuen Mantentzea",
+    "VIC": "Beira eta Zeramika"
+  }
+}
