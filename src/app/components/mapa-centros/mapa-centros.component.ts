@@ -222,150 +222,169 @@ export class MapaCentrosComponent implements OnInit, AfterViewInit {
   }
 
   // 5️⃣ ACTUALIZAR cambiarIdioma() para recargar familias
-  cambiarIdioma (lang: 'es' | 'eu'): void {
-    console.log('🌍 Cambiando idioma a:', lang)
-
-    this.currentLang = lang
-    this.translate.use(lang)
-
-    // ✅ FORZAR LIMPIEZA INMEDIATA
-    this.familiasFiltradas = []
-    this.familiaSeleccionada = ''
-
+  cambiarIdioma(lang: 'es' | 'eu'): void {
+    console.log('🌐 Cambiando idioma a:', lang);
+  
+    this.currentLang = lang;
+    this.translate.use(lang);
+  
+    // ✅ CRÍTICO: Guardar estado del popup ANTES de cualquier operación
+    const popupEstabaAbierto = this.popupVisible;
+    const centroActual = this.centroSeleccionado;
+    const tabActual = this.tabActiva;
+    const posicionActual = { ...this.popupPosition };
+    const claseActual = this.popupClass;
+  
+    console.log('💾 Estado guardado:', {
+      popupAbierto: popupEstabaAbierto,
+      centro: centroActual?.NOM,
+      tab: tabActual
+    });
+  
+    // ✅ TEMPORAL: Limpiar familias SIN afectar el popup
+    const familiaSeleccionadaAnterior = this.familiaSeleccionada;
+    this.familiasFiltradas = [];
+    this.familiaSeleccionada = '';
+  
     // ✅ ESPERAR a que el cambio de idioma se complete ANTES de recargar datos
     this.translate.use(lang).subscribe({
       next: () => {
-        console.log('✅ Idioma cambiado exitosamente a:', lang)
-
+        console.log('✅ Idioma cambiado exitosamente a:', lang);
+  
         // ✅ PASO 1: Cargar traducciones base
         this.translate
           .get(['familiasProfesionales', 'tiposCentro', 'tabs', 'grados'])
           .subscribe({
             next: () => {
-              console.log('📚 Traducciones base cargadas')
-
+              console.log('📚 Traducciones base cargadas');
+  
               // ✅ PASO 2: Recargar etiquetas
-              this.cargarEtiquetasTraducidas()
-              this.cargarEtiquetasTiposCentro()
-              this.cargarEtiquetasFamilias()
-
+              this.cargarEtiquetasTraducidas();
+              this.cargarEtiquetasTiposCentro();
+              this.cargarEtiquetasFamilias();
+  
               // ✅ PASO 3: Esperar 3 ciclos de Angular antes de recargar familias
               setTimeout(() => {
-                console.log('⏳ Primer timeout completado')
-
                 setTimeout(() => {
-                  console.log('⏳ Segundo timeout completado')
-
                   setTimeout(() => {
-                    console.log(
-                      '⏳ Tercer timeout completado - AHORA SÍ recargar familias'
-                    )
-
+                    console.log('⏳ Tercer timeout completado - Recargando familias');
+  
                     // ✅ AHORA SÍ: Cargar familias traducidas
-                    this.cargarFamiliasTraducidasForzado()
-
+                    this.cargarFamiliasTraducidasForzado();
+  
                     // Reconstruir tipos de centro
-                    const tiposConFP = new Set<string>()
+                    const tiposConFP = new Set<string>();
                     institutos.forEach(centro => {
                       if (centro.DGENRC && centro.DGENRC.trim() !== '') {
-                        tiposConFP.add(centro.DGENRC)
+                        tiposConFP.add(centro.DGENRC);
                       }
-                    })
-
-                    const tiposUnicos = Array.from(tiposConFP).sort()
+                    });
+  
+                    const tiposUnicos = Array.from(tiposConFP).sort();
                     this.tiposCentro = tiposUnicos.map(codigo => ({
                       value: codigo,
                       label: this.tipoCentroLabels[codigo] || codigo
-                    }))
-
+                    }));
+  
                     // Recargar provincias
-                    const campoProvincia = lang === 'eu' ? 'DTERRE' : 'DTERRC'
+                    const campoProvincia = lang === 'eu' ? 'DTERRE' : 'DTERRC';
                     this.provincias = Array.from(
                       new Set(institutos.map(c => c[campoProvincia] as string))
-                    ).sort()
-
+                    ).sort();
+  
                     // Ajustar provincia seleccionada
                     if (this.provinciaSeleccionada) {
                       const centroConProvincia = institutos.find(c => {
-                        const provinciaAnterior =
-                          lang === 'eu' ? c.DTERRC : c.DTERRE
-                        return provinciaAnterior === this.provinciaSeleccionada
-                      })
-
+                        const provinciaAnterior = lang === 'eu' ? c.DTERRC : c.DTERRE;
+                        return provinciaAnterior === this.provinciaSeleccionada;
+                      });
+  
                       if (centroConProvincia) {
                         this.provinciaSeleccionada =
                           lang === 'eu'
                             ? centroConProvincia.DTERRE
-                            : centroConProvincia.DTERRC
-                        this.actualizarMunicipios()
+                            : centroConProvincia.DTERRC;
+                        this.actualizarMunicipios();
                       } else {
-                        this.provinciaSeleccionada = ''
-                        this.municipioSeleccionado = ''
-                        this.municipioEnabled = false
+                        this.provinciaSeleccionada = '';
+                        this.municipioSeleccionado = '';
+                        this.municipioEnabled = false;
                       }
                     }
-                  }, 300) // Tercer timeout: 300ms
-                }, 200) // Segundo timeout: 200ms
-              }, 150) // Primer timeout: 150ms
+  
+                    // ✅ CRÍTICO: RESTAURAR el estado del popup SI estaba abierto
+                    if (popupEstabaAbierto && centroActual) {
+                      console.log('🔄 Restaurando popup...');
+                      
+                      // Restaurar todas las propiedades del popup
+                      this.centroSeleccionado = centroActual;
+                      this.selectedCentro = centroActual;
+                      this.tabActiva = tabActual;
+                      this.popupPosition = posicionActual;
+                      this.popupClass = claseActual;
+                      
+                      // ✅ RECARGAR los ciclos del centro con las traducciones nuevas
+                      this.cargarCiclosCentro(centroActual.CCEN);
+                      
+                      // ✅ IMPORTANTE: Reactivar el popup DESPUÉS de un micro-delay
+                      setTimeout(() => {
+                        this.popupVisible = true;
+                        console.log('✅ Popup restaurado exitosamente');
+                      }, 50);
+                    }
+  
+                  }, 300); // Tercer timeout: 300ms
+                }, 200); // Segundo timeout: 200ms
+              }, 150); // Primer timeout: 150ms
             },
             error: err => {
-              console.error('❌ Error cargando traducciones base:', err)
+              console.error('❌ Error cargando traducciones base:', err);
             }
-          })
+          });
       },
       error: err => {
-        console.error('❌ Error al cambiar idioma:', err)
+        console.error('❌ Error al cambiar idioma:', err);
       }
-    })
+    });
   }
 
   /**
    * ✅ VERSIÓN FORZADA que NO usa reintentos, sino que espera explícitamente
    */
-  private cargarFamiliasTraducidasForzado (): void {
-    console.log('🔥 FORZANDO carga de familias traducidas')
-    console.log('🌍 Idioma actual:', this.currentLang)
-
-    // ✅ Limpiar array primero
-    this.familiasFiltradas = []
-
+  private cargarFamiliasTraducidasForzado(): void {
+    console.log('🔥 FORZANDO carga de familias traducidas');
+    console.log('🌐 Idioma actual:', this.currentLang);
+  
+    // ✅ NO limpiar el array si el popup está abierto
+    if (!this.popupVisible) {
+      this.familiasFiltradas = [];
+    }
+  
     // ✅ Obtener traducciones DIRECTAMENTE del servicio (sin caché)
     this.translate.getTranslation(this.currentLang).subscribe({
       next: translations => {
-        const familias = translations.familiasProfesionales as Record<
-          string,
-          string
-        >
-
-        console.log('📦 Traducciones recibidas:', familias)
-        console.log(
-          '🔑 Primera familia:',
-          Object.keys(familias)[0],
-          '→',
-          Object.values(familias)[0]
-        )
-
+        const familias = translations.familiasProfesionales as Record<string, string>;
+  
+        console.log('📦 Traducciones recibidas:', familias);
+  
         // ✅ Verificar que NO sean códigos
-        const primeraClave = Object.keys(familias)[0]
-        const primerValor = familias[primeraClave]
-
+        const primeraClave = Object.keys(familias)[0];
+        const primerValor = familias[primeraClave];
+  
         if (
           primerValor === primeraClave ||
           primerValor.startsWith('familiasProfesionales.')
         ) {
-          console.error('❌ Las traducciones AÚN NO están listas')
-
-          // ✅ Último recurso: usar fallback
-          this.usarFallbackFamilias()
-          return
+          console.error('❌ Las traducciones AÚN NO están listas');
+          this.usarFallbackFamilias();
+          return;
         }
-
+  
         // ✅ Mapear códigos a nombres traducidos
         this.familiasFiltradas = Object.keys(familias)
           .map(codigo => {
-            const nombre = familias[codigo]
-            console.log(`  📌 ${codigo} → ${nombre}`)
-            return nombre
+            const nombre = familias[codigo];
+            return nombre;
           })
           .filter(
             nombre =>
@@ -373,31 +392,24 @@ export class MapaCentrosComponent implements OnInit, AfterViewInit {
               nombre.trim() !== '' &&
               !nombre.startsWith('familiasProfesionales.')
           )
-          .sort()
-
-        console.log(
-          '✅ Familias FORZADAS cargadas:',
-          this.familiasFiltradas.length
-        )
-        console.log(
-          '📋 Primeras 5 familias:',
-          this.familiasFiltradas.slice(0, 5)
-        )
-
+          .sort();
+  
+        console.log('✅ Familias FORZADAS cargadas:', this.familiasFiltradas.length);
+  
         // ✅ VERIFICACIÓN FINAL
         if (
           this.familiasFiltradas.length === 0 ||
           this.familiasFiltradas[0].length <= 3
         ) {
-          console.error('❌ Familias no válidas, usando fallback')
-          this.usarFallbackFamilias()
+          console.error('❌ Familias no válidas, usando fallback');
+          this.usarFallbackFamilias();
         }
       },
       error: err => {
-        console.error('❌ Error obteniendo traducciones:', err)
-        this.usarFallbackFamilias()
+        console.error('❌ Error obteniendo traducciones:', err);
+        this.usarFallbackFamilias();
       }
-    })
+    });
   }
 
   // ✅ NUEVO MÉTODO para traducir la familia seleccionada al cambiar idioma
@@ -1078,57 +1090,59 @@ export class MapaCentrosComponent implements OnInit, AfterViewInit {
     }
   }
 
-  actualizarMunicipios (): void {
-    this.cerrarPopup()
-
+  actualizarMunicipios(): void {
+    // ✅ CAMBIO: NO cerrar el popup aquí, solo si hay cambio real de filtros
+    // this.cerrarPopup(); // ❌ ELIMINAR ESTA LÍNEA
+  
     if (this.provinciaSeleccionada) {
-      const centrosConCiclos = new Set<number>()
+      const centrosConCiclos = new Set<number>();
       ciclosAsignacion.forEach(ciclo => {
-        ciclo.centros.forEach(ccen => centrosConCiclos.add(ccen))
-      })
-
-      const campoProvincia = this.currentLang === 'eu' ? 'DTERRE' : 'DTERRC'
-      const campoMunicipio = this.currentLang === 'eu' ? 'DMUNIE' : 'DMUNIC'
-
-      const municipiosSet = new Set<string>()
-
+        ciclo.centros.forEach(ccen => centrosConCiclos.add(ccen));
+      });
+  
+      const campoProvincia = this.currentLang === 'eu' ? 'DTERRE' : 'DTERRC';
+      const campoMunicipio = this.currentLang === 'eu' ? 'DMUNIE' : 'DMUNIC';
+  
+      const municipiosSet = new Set<string>();
+  
       institutos
         .filter(c => {
-          if (c[campoProvincia] !== this.provinciaSeleccionada) return false
-          if (!centrosConCiclos.has(c.CCEN)) return false
-
+          if (c[campoProvincia] !== this.provinciaSeleccionada) return false;
+          if (!centrosConCiclos.has(c.CCEN)) return false;
+  
           if (this.tipoCentroSeleccionado) {
             if (this.tipoCentroSeleccionado === 'CIFP') {
-              if (c.DGENRC !== 'CIFP' && c.DGENRC !== 'CIFPD') return false
+              if (c.DGENRC !== 'CIFP' && c.DGENRC !== 'CIFPD') return false;
             } else {
-              if (c.DGENRC !== this.tipoCentroSeleccionado) return false
+              if (c.DGENRC !== this.tipoCentroSeleccionado) return false;
             }
           }
-          return true
+          return true;
         })
-        .forEach(c => municipiosSet.add(c[campoMunicipio] as string))
-
-      this.municipios = Array.from(municipiosSet).sort()
-      this.municipioEnabled = true
+        .forEach(c => municipiosSet.add(c[campoMunicipio] as string));
+  
+      this.municipios = Array.from(municipiosSet).sort();
+      this.municipioEnabled = true;
     } else {
-      this.municipios = []
-      this.municipioSeleccionado = ''
-      this.municipioEnabled = false
+      this.municipios = [];
+      this.municipioSeleccionado = '';
+      this.municipioEnabled = false;
     }
-
+  
     // ✅ NUEVO: Actualizar familias basadas en centros disponibles
-    this.actualizarFamiliasDisponibles()
-
-    this.actualizarMapa('provincia')
+    this.actualizarFamiliasDisponibles();
+  
+    this.actualizarMapa('provincia');
   }
 
-  actualizarFamilias (): void {
-    this.cerrarPopup()
-
+  actualizarFamilias(): void {
+    // ✅ NO cerrar popup automáticamente
+    // this.cerrarPopup(); // ❌ ELIMINAR
+  
     // ✅ Actualizar familias disponibles según filtros actuales
-    this.actualizarFamiliasDisponibles()
-
-    this.actualizarMapa('municipio')
+    this.actualizarFamiliasDisponibles();
+  
+    this.actualizarMapa('municipio');
   }
 
   // 4️⃣ MODIFICAR actualizarCiclos() para manejar la traducción inversa
@@ -1936,7 +1950,7 @@ export class MapaCentrosComponent implements OnInit, AfterViewInit {
 
   // ✅ NUEVO MÉTODO que combina familia + grado para filtrar ciclos
   actualizarCiclosPorFamiliaYGrado (): void {
-    this.cerrarPopup()
+    // this.cerrarPopup()
 
     if (!this.familiaSeleccionada && !this.gradoSeleccionado) {
       this.ciclosFiltrados = []
@@ -1977,28 +1991,28 @@ export class MapaCentrosComponent implements OnInit, AfterViewInit {
     this.cicloSeleccionado = ''
   }
 
-  limpiarFiltros (): void {
-    this.cerrarPopup()
-
-    this.provinciaSeleccionada = ''
-    this.municipioSeleccionado = ''
-    this.tipoCentroSeleccionado = ''
-    this.gradoSeleccionado = ''
-    this.familiaSeleccionada = ''
-    this.cicloSeleccionado = ''
-    this.municipios = []
-    this.municipioEnabled = false
-    this.ciclosFiltrados = []
-
-    this.isPanning = false
-    this.panAttempts = 0
-
+  limpiarFiltros(): void {
+    this.cerrarPopup(); // ✅ Aquí SÍ cerramos porque es una acción explícita del usuario
+  
+    this.provinciaSeleccionada = '';
+    this.municipioSeleccionado = '';
+    this.tipoCentroSeleccionado = '';
+    this.gradoSeleccionado = '';
+    this.familiaSeleccionada = '';
+    this.cicloSeleccionado = '';
+    this.municipios = [];
+    this.municipioEnabled = false;
+    this.ciclosFiltrados = [];
+  
+    this.isPanning = false;
+    this.panAttempts = 0;
+  
     // ✅ RECARGAR TODAS LAS FAMILIAS TRADUCIDAS
-    this.cargarTodasLasFamiliasTraducidas()
-
-    this.actualizarMapa()
+    this.cargarTodasLasFamiliasTraducidas();
+  
+    this.actualizarMapa();
   }
-
+  
   /**
    * Limpia los filtros y cierra el modal de advertencia
    */

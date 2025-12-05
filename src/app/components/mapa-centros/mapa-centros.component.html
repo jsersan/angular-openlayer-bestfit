@@ -90,9 +90,9 @@
       <div class="popup-header">
         <img [src]="getImagenCentro(centroSeleccionado.CCEN)" [alt]="centroSeleccionado.NOM" class="centro-imagen"
           (error)="onImageError($event)">
-        <div class="centro-info-header">
-          <span class="centro-codigo">{{centroSeleccionado.DGENRC}} - {{centroSeleccionado.CCEN}}</span>
-          <h3 class="centro-nombre">{{centroSeleccionado.NOME || centroSeleccionado.NOM}}</h3>
+        <div>
+          <span class="centro-codigo">{{centroSeleccionado.CCEN}}</span>
+          <h3 class="centro-nombre">{{centroSeleccionado.DGENRC}} {{centroSeleccionado.NOME || centroSeleccionado.NOM}} {{centroSeleccionado.DGENRE}}</h3>
         </div>
       </div>
 
