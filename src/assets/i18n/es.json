@@ -61,6 +61,7 @@
   "tiposCentro": {
     "CIFP": "Centro Integrado de Formación Profesional",
     "CIFPD": "Centro Integrado de FP a Distancia",
+    "CPIFP":"Centro Público Integrado de Formación Profesional",
     "CPES": "Centro Privado de Educación Secundaria",
     "CPEPS": "Centro Privado de Educación Infantil, Primaria y Secundaria",
     "CPFPB": "Centro Privado de Formación Profesional Básica",
