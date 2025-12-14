@@ -42,7 +42,6 @@
   }
 }
 
-// Selector de idioma (estilo Gobierno Vasco)
 .language-selector {
   display: flex;
   align-items: center;
@@ -161,7 +160,7 @@
     flex-grow: 1;
     width: calc(100vw - 360px);
     height: calc(100vh - 48px);
-    position: relative; // ✅ CRÍTICO: El contenedor debe ser relative
+    position: relative;
   
     #map {
       width: 100%;
@@ -173,7 +172,7 @@
     }
   
     .ol-popup {
-      position: absolute !important; // ✅ CAMBIO CRÍTICO
+      position: absolute !important;
       background-color: white;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       border-radius: 12px;
@@ -185,9 +184,8 @@
       flex-direction: column;
       z-index: 10000;
       overflow: visible;
-      pointer-events: auto; // ✅ Permitir interacción
+      pointer-events: auto;
   
-      // ✅ Flecha del popup
       &::after {
         content: '';
         position: absolute;
@@ -252,7 +250,7 @@
       align-items: center;
       padding: 20px;
       gap: 20px;
-      border-radius: 12px 12px 0 0; // ✅ Redondear solo arriba
+      border-radius: 12px 12px 0 0;
   
       .centro-imagen {
         width: 120px;
@@ -265,7 +263,7 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         position: relative;
         z-index: 1;
-        flex-shrink: 0; // ✅ No permitir que se encoja
+        flex-shrink: 0;
         
         &:hover {
           transform: scale(2.5);
@@ -274,32 +272,31 @@
         }
       }
 
-    // ✅ NUEVO: Contenedor de info del centro
-    .centro-info-header {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      min-width: 0; // ✅ Permitir que el texto se trunca
+      .centro-info-header {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 0;
 
-      .centro-codigo {
-        font-size: 0.85em;
-        color: rgba(255, 255, 255, 0.9);
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
+        .centro-codigo {
+          font-size: 0.85em;
+          color: rgba(255, 255, 255, 0.9);
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
 
-      .centro-nombre {
-        font-size: 1.3em;
-        font-weight: 700;
-        color: white;
-        margin: 0;
-        line-height: 1.3;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        word-wrap: break-word; // ✅ Permitir saltos de línea
+        .centro-nombre {
+          font-size: 1.3em;
+          font-weight: 700;
+          color: white;
+          margin: 0;
+          line-height: 1.3;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          word-wrap: break-word;
+        }
       }
-    }
     }
 
     .popup-tabs {
@@ -347,13 +344,12 @@
           }
         }
       }
-    }   
-
+    }
 
     .popup-content {
       padding: 20px;
       overflow-y: auto;
-      overflow-x: hidden; // ✅ Evitar scroll horizontal
+      overflow-x: hidden;
       min-height: 200px;
       max-height: 400px;
       height: auto;
@@ -362,7 +358,6 @@
       .tab-panel {
         animation: fadeIn 0.3s ease-in;
       }
-    }
 
       .info-row {
         display: flex;
@@ -532,33 +527,6 @@
           }
         }
       }
-    
-// ... estilos del popup ...
-
-// ✅ Estilos para la imagen del centro con efecto zoom
-.centro-imagen {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 3px solid white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
-  position: relative;
-  z-index: 1;
-  
-  &:hover {
-    transform: scale(2.5);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-    z-index: 9999; // Por encima de todo
-  }
-}
-
-// Responsive para móviles
-@media (max-width: 768px) {
-  // ... otros estilos responsivos ...
-}
 
       .ciclos-list {
         .empty-state {
@@ -716,80 +684,6 @@
         }
       }
     }
-
-    @media (max-height: 700px) {
-      .ol-popup {
-        max-height: calc(100vh - 20px);
-
-        .popup-header {
-          height: auto;
-          min-height: 120px;
-          padding: 15px;
-
-          .centro-imagen {
-            width: 90px;
-            height: 90px;
-          }
-        }
-
-        .popup-content {
-          max-height: calc(100vh - 250px);
-        }
-      }
-    }
-  }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes shine {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
-// Estilos para snackbar
-::ng-deep .snackbar-info {
-  background-color: #2196F3;
-  color: white;
-
-  .mat-simple-snackbar {
-    color: white;
-  }
-
-  .mat-simple-snackbar-action {
-    color: #FFD740;
-  }
-}
-
-::ng-deep .snackbar-error {
-  background-color: #dc3545 !important;
-  color: white !important;
-  border-radius: 0 !important;
-
-  .mat-simple-snackbar {
-    color: white !important;
-  }
-
-  .mat-simple-snackbar-action {
-    color: #FFD740 !important;
-  }
-
-  .mdc-snackbar__surface,
-  .mat-mdc-snack-bar-container {
-    background-color: #dc3545 !important;
-    border-radius: 0 !important;
   }
 }
 
@@ -811,8 +705,6 @@
   display: block !important;
 }
 
-
-// Modal de advertencia
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -925,6 +817,26 @@
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
 @keyframes fadeInModal {
   from {
     opacity: 0;
@@ -945,29 +857,324 @@
   }
 }
 
-// Responsive para móviles
+::ng-deep .snackbar-info {
+  background-color: #2196F3;
+  color: white;
+
+  .mat-simple-snackbar {
+    color: white;
+  }
+
+  .mat-simple-snackbar-action {
+    color: #FFD740;
+  }
+}
+
+::ng-deep .snackbar-error {
+  background-color: #dc3545 !important;
+  color: white !important;
+  border-radius: 0 !important;
+
+  .mat-simple-snackbar {
+    color: white !important;
+  }
+
+  .mat-simple-snackbar-action {
+    color: #FFD740 !important;
+  }
+
+  .mdc-snackbar__surface,
+  .mat-mdc-snack-bar-container {
+    background-color: #dc3545 !important;
+    border-radius: 0 !important;
+  }
+}
+
+// ============================================
+// 🎯 RESPONSIVE DESIGN - MOBILE FIRST
+// ============================================
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .sidebar {
+    width: 300px;
+    min-width: 280px;
+  }
+
+  .main-map {
+    width: calc(100vw - 300px);
+  }
+
+  .ol-popup {
+    min-width: 360px;
+    max-width: 420px;
+  }
+}
+
 @media (max-width: 768px) {
+  .app-header {
+    height: 56px;
+    padding: 0.5rem 1rem;
+
+    .header-content {
+      gap: 0.5rem;
+
+      .logo {
+        font-size: 0.95em;
+        max-width: 180px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .nav-link {
+        font-size: 0.85em;
+        padding: 0.25rem 0.6rem;
+      }
+    }
+
+    .language-selector {
+      margin-left: auto;
+      margin-right: 10px;
+      gap: 6px;
+    }
+
+    .lang-btn {
+      font-size: 13px;
+    }
+  }
+
   .mapa-centros-container {
     flex-direction: column;
+    height: calc(100vh - 56px);
 
     .sidebar {
       width: 100%;
       max-width: 100%;
       height: auto;
+      max-height: 40vh;
+      overflow-y: auto;
       border-right: none;
-      border-bottom: 1px solid #eaeaea;
+      border-bottom: 2px solid #e0e0e0;
+      padding: 12px 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      .filters {
+        gap: 10px;
+        margin-bottom: 12px;
+
+        select {
+          padding: 10px 8px;
+          font-size: 14px;
+        }
+
+        .btn-limpiar {
+          padding: 10px;
+          font-size: 14px;
+          margin-top: 6px;
+        }
+      }
     }
 
     .main-map {
       width: 100%;
-      height: calc(100vh - 300px);
+      height: 60vh;
+      min-height: 400px;
+
+      #map {
+        width: 100%;
+        height: 100%;
+        min-height: 400px;
+      }
+
+      .ol-popup {
+        min-width: 90vw;
+        max-width: 95vw;
+        max-height: 85vh;
+        
+        &.popup-centered {
+          left: 50% !important;
+          top: 50% !important;
+          transform: translate(-50%, -50%) !important;
+        }
+
+        .popup-header {
+          height: auto;
+          min-height: 140px;
+          padding: 16px;
+          flex-direction: column;
+          gap: 12px;
+
+          .centro-imagen {
+            width: 100px;
+            height: 100px;
+            align-self: center;
+
+            &:hover {
+              transform: scale(2);
+            }
+          }
+
+          .centro-info-header {
+            text-align: center;
+
+            .centro-codigo {
+              font-size: 0.8em;
+            }
+
+            .centro-nombre {
+              font-size: 1.1em;
+            }
+          }
+        }
+
+        .popup-tabs {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin;
+
+          &::-webkit-scrollbar {
+            height: 4px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: #17a2b8;
+            border-radius: 2px;
+          }
+
+          .tab-button {
+            flex-shrink: 0;
+            min-width: max-content;
+            padding: 10px 14px;
+            font-size: 0.85em;
+          }
+        }
+
+        .popup-content {
+          max-height: calc(85vh - 240px);
+          padding: 16px;
+
+          .info-row {
+            padding: 10px 0;
+            
+            strong {
+              font-size: 0.8em;
+            }
+
+            span, a {
+              font-size: 0.9em;
+            }
+          }
+
+          .oferta-resumen {
+            .stats-grid {
+              grid-template-columns: repeat(3, 1fr);
+              gap: 8px;
+
+              .stat-item {
+                padding: 12px 8px;
+
+                .stat-number {
+                  font-size: 1.5em;
+                }
+
+                .stat-label {
+                  font-size: 0.75em;
+                }
+              }
+            }
+
+            .familias-chips {
+              .familia-chip {
+                font-size: 0.8em;
+                padding: 5px 10px;
+              }
+            }
+          }
+
+          .ciclos-list .ciclo-card {
+            padding: 12px;
+            margin-bottom: 10px;
+
+            .ciclo-header {
+              flex-wrap: wrap;
+              gap: 6px;
+
+              .ciclo-abr {
+                font-size: 0.8em;
+                padding: 3px 10px;
+              }
+
+              .ciclo-modalidad {
+                font-size: 0.75em;
+                padding: 3px 8px;
+              }
+            }
+
+            .ciclo-nombre {
+              font-size: 0.95em;
+              margin: 6px 0 3px 0;
+            }
+
+            .ciclo-nombre-euskera {
+              font-size: 0.85em;
+              margin: 0 0 10px 0;
+            }
+
+            .ciclo-footer {
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 6px;
+
+              .ciclo-familia {
+                font-size: 0.8em;
+              }
+
+              .ciclo-duracion {
+                font-size: 0.75em;
+                padding: 3px 6px;
+              }
+            }
+
+            .ciclo-idiomas {
+              margin-top: 8px;
+              gap: 4px;
+
+              .idioma-badge {
+                font-size: 0.7em;
+                padding: 2px 6px;
+              }
+            }
+
+            .ciclo-actions {
+              margin-top: 10px;
+              padding-top: 10px;
+
+              .btn-dcb {
+                padding: 8px 12px;
+                font-size: 0.8em;
+                width: 100%;
+                justify-content: center;
+              }
+            }
+          }
+        }
+      }
     }
   }
 
+  .map-tooltip {
+    max-width: 250px;
+    font-size: 0.9em;
+    padding: 8px 12px;
+  }
+
   .modal-overlay {
+    padding: 10px;
+
     .modal-advertencia {
-      padding: 24px;
-      max-width: 90%;
+      padding: 20px;
+      max-width: 92%;
+      width: 92%;
 
       .modal-icon svg {
         width: 48px;
@@ -975,55 +1182,230 @@
       }
 
       h3 {
-        font-size: 1.3em;
+        font-size: 1.25em;
+        margin-bottom: 12px;
       }
 
       p {
         font-size: 0.9em;
+        margin-bottom: 20px;
       }
 
       .modal-actions {
         flex-direction: column;
+        gap: 10px;
 
         button {
           width: 100%;
           min-width: auto;
+          padding: 12px 20px;
+          font-size: 0.9em;
         }
       }
     }
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .app-header {
-    padding: 0.5rem 1rem;
-    height: 56px;
+    height: 52px;
+    padding: 0.4rem 0.8rem;
 
     .header-content {
-      gap: 0.5rem;
+      gap: 0.4rem;
 
       .logo {
-        font-size: 0.9em;
+        font-size: 0.85em;
+        max-width: 140px;
       }
 
       .nav-link {
-        font-size: 0.85em;
+        font-size: 0.8em;
         padding: 0.2rem 0.5rem;
       }
     }
 
-    .header-title {
-      display: none;
+    .language-selector {
+      margin-right: 5px;
+      gap: 5px;
+    }
+
+    .lang-btn {
+      font-size: 12px;
     }
   }
 
-  .language-selector {
-    padding-left: 8px;
-    gap: 4px;
-  }
+  .mapa-centros-container {
+    height: calc(100vh - 52px);
 
-  .lang-btn {
-    padding: 4px 8px;
-    font-size: 12px;
+    .sidebar {
+      max-height: 35vh;
+      padding: 10px 12px;
+
+      .filters {
+        gap: 8px;
+
+        select {
+          padding: 9px 7px;
+          font-size: 13px;
+        }
+
+        .btn-limpiar {
+          padding: 9px;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .main-map {
+      height: 65vh;
+
+      #map {
+        min-height: 350px;
+      }
+
+      .ol-popup {
+        min-width: 92vw;
+        max-width: 96vw;
+        max-height: 88vh;
+
+        .popup-header {
+          min-height: 120px;
+          padding: 14px;
+
+          .centro-imagen {
+            width: 80px;
+            height: 80px;
+
+            &:hover {
+              transform: scale(1.8);
+            }
+          }
+
+          .centro-info-header {
+            .centro-codigo {
+              font-size: 0.75em;
+            }
+
+            .centro-nombre {
+              font-size: 1em;
+            }
+          }
+        }
+
+        .popup-tabs .tab-button {
+          padding: 9px 12px;
+          font-size: 0.8em;
+        }
+
+        .popup-content {
+          max-height: calc(88vh - 220px);
+          padding: 14px;
+
+          .oferta-resumen {
+            h4 {
+              font-size: 1.1em;
+              margin-bottom: 12px;
+            }
+
+            .stats-grid {
+              gap: 6px;
+
+              .stat-item {
+                padding: 10px 6px;
+
+                .stat-number {
+                  font-size: 1.3em;
+                  margin-bottom: 2px;
+                }
+
+                .stat-label {
+                  font-size: 0.7em;
+                }
+              }
+            }
+          }
+
+          .ciclos-list .ciclo-card {
+            padding: 10px;
+
+            .ciclo-actions .btn-dcb {
+              padding: 7px 10px;
+              font-size: 0.75em;
+
+              svg {
+                width: 14px;
+                height: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
+
+@media (max-width: 360px) {
+  .app-header {
+    height: 48px;
+    padding: 0.3rem 0.6rem;
+
+    .header-content .logo {
+      font-size: 0.8em;
+      max-width: 110px;
+    }
+  }
+
+  .mapa-centros-container {
+    height: calc(100vh - 48px);
+
+    .sidebar {
+      max-height: 32vh;
+    }
+
+    .main-map {
+      height: 68vh;
+    }
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .mapa-centros-container {
+    .sidebar {
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+
+    .main-map {
+      height: 50vh;
+
+      .ol-popup {
+        max-height: 90vh;
+
+        .popup-content {
+          max-height: calc(90vh - 180px);
+        }
+      }
+    }
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  button, select, a, .tab-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .ciclo-card:active {
+    background: #f0f0f0;
+  }
+
+  .stat-item.clickable:active {
+    transform: scale(0.98);
+  }
+
+  .popup-content, .sidebar {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+} 

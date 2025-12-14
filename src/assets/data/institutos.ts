@@ -476,7 +476,7 @@ export const institutos = [
     TEL1: 945000440,
     TFAX: 945000439,
     EMAIL: '010138aa@hezkuntza.net',
-    PAGINA: 'http://www.mendizabala.com',
+    PAGINA: 'https://www.mendizabala.eus/',
     COOR_X: 525751.532607079,
     COOR_Y: 4742678.001608628
   },
@@ -981,7 +981,7 @@ export const institutos = [
   TEL1: '945430228',
   TFAX: '945430882',
   EMAIL: '010745aa@hezkuntza.net',
-  PAGINA: 'https://www.murgia.eus/',
+  PAGINA: 'https://murgiafp.eus/',
   COOR_X: 513791,
   COOR_Y: 4756060
 },
@@ -1005,7 +1005,7 @@ export const institutos = [
     TEL1: 943692162,
     TFAX: 943692247,
     EMAIL: '012040aa@hezkuntza.net',
-    PAGINA: 'http://fraisoroeskola.net',
+    PAGINA: 'https://fraisoroeskola.eus/es/',
     COOR_X: 576277.910547748,
     COOR_Y: 4782182.010681828
   },
@@ -1053,7 +1053,7 @@ export const institutos = [
     TEL1: 943203244,
     TFAX: 943204114,
     EMAIL: '012054aa@hezkuntza.net',
-    PAGINA: 'http://www.armeriaeskola.com',
+    PAGINA: 'https://armeriaeskola.eus/es/',
     COOR_X: 542428.381632847,
     COOR_Y: 4781358.958211778
   },
@@ -1101,7 +1101,7 @@ export const institutos = [
     TEL1: 943617547,
     TFAX: 943612550,
     EMAIL: '012108aa@hezkuntza.net',
-    PAGINA: 'https://www.plaiaundi.hezkuntza.net',
+    PAGINA: 'https://www.plaiaundi.eus/es/',
     COOR_X: 597505.781219859,
     COOR_Y: 4799912.871616363
   },
@@ -1221,7 +1221,7 @@ export const institutos = [
     TEL1: 943899251,
     TFAX: 943899252,
     EMAIL: '012225aa@hezkuntza.net',
-    PAGINA: 'http://www.bidebieta.com',
+    PAGINA: 'https://www.fpbidebietalh.eus/',
     COOR_X: 585478.39272964,
     COOR_Y: 4797296.034266037
   },
@@ -1245,7 +1245,7 @@ export const institutos = [
     TEL1: 943455422,
     TFAX: 943470022,
     EMAIL: '012229aa@hezkuntza.net',
-    PAGINA: 'http://www.ieaso.net',
+    PAGINA: 'https://easo.hezkuntza.net/es/',
     COOR_X: 582976.686028662,
     COOR_Y: 4795354.089543269
   },
@@ -1437,7 +1437,7 @@ export const institutos = [
     TEL1: '943272587',
     TFAX: '943219974',
     EMAIL: 'zurriola@ikastola.net',
-    PAGINA: 'https://zurriola.eus/',
+    PAGINA: 'https://zurriolaikastola.eus/',
     COOR_X: 583798.12879159,
     COOR_Y: 4797331.996945938
   },
@@ -1823,7 +1823,7 @@ export const institutos = [
     TEL1: 943673629,
     TFAX: 943675222,
     EMAIL: 'zuzendaritza@inmakuladatolosa.com',
-    PAGINA: 'http://www.inmakuladatolosa.com',
+    PAGINA: 'https://inmakuladatolosa.eus/es/inicio/',
     COOR_X: 575186.985347381,
     COOR_Y: 4775811.927293879
   },
@@ -2067,7 +2067,7 @@ export const institutos = [
     TEL1: 943590557,
     TFAX: 943300563,
     EMAIL: 'lsbandoain@lasalleberrozpe.eus',
-    PAGINA: 'http://www.lasalleberrozpe.com',
+    PAGINA: 'https://lasalleberrozpe.eus/?lang=es',
     COOR_X: 579680.30257534,
     COOR_Y: 4785679.61875382
   },
@@ -2091,7 +2091,7 @@ export const institutos = [
     TEL1: 943283601,
     TFAX: 943283601,
     EMAIL: 'secretaria@centrobeta.com',
-    PAGINA: 'http://www.centrosbeta.com',
+    PAGINA: 'https://www.centrobeta.com/',
     COOR_X: 583505.11271453,
     COOR_Y: 4797424.488119626
   },
@@ -2571,7 +2571,7 @@ export const institutos = [
     TEL1: 943899294,
     TFAX: null,
     EMAIL: '012982aa@hezkuntza.net',
-    PAGINA: 'http://www.zubirimanteo.com',
+    PAGINA: 'https://zubirimanteo.eus/es/',
     COOR_X: 583437.430824548,
     COOR_Y: 4797690.983875186
   },
@@ -2691,7 +2691,7 @@ export const institutos = [
     TEL1: 943899300,
     TFAX: 943899303,
     EMAIL: '013015aa@hezkuntza.net',
-    PAGINA: 'http://www.onati.net',
+    PAGINA: 'https://zuazolalarranabhi.hezkuntza.net/es/',
     COOR_X: 548743.469732821,
     COOR_Y: 4764753.178270262
   },
@@ -2715,7 +2715,7 @@ export const institutos = [
     TEL1: 943899270,
     TFAX: null,
     EMAIL: '013020aa@hezkuntza.net',
-    PAGINA: 'http://www.imaltuna.com',
+    PAGINA: 'https://maltuna.eus/es/',
     COOR_X: 547157.2743865,
     COOR_Y: 4773205.587806745
   },
@@ -2787,7 +2787,7 @@ export const institutos = [
     TEL1: 943651147,
     TFAX: 943651856,
     EMAIL: '013023aa@hezkuntza.net',
-    PAGINA: 'http://www.tolosaldea.com',
+    PAGINA: 'https://tolosaldea.hezkuntza.net/es/',
     COOR_X: 575740.40518731,
     COOR_Y: 4777804.271757926
   },
@@ -2979,7 +2979,7 @@ export const institutos = [
     TEL1: 943748019,
     TFAX: 943748230,
     EMAIL: '013432aa@hezkuntza.net',
-    PAGINA: 'http://www.meka-elgoibar.net',
+    PAGINA: 'https://meka.eus/es/home-es/',
     COOR_X: 547660.171938427,
     COOR_Y: 4784740.999806991
   },
@@ -3460,7 +3460,7 @@ export const institutos = [
     TEL1: '943673948',
     TFAX: null,
     EMAIL: 'info@gainberri.eus',
-    PAGINA: 'https://www.gainberri.eus/',
+    PAGINA: 'https://gainberri.com/',
     COOR_X: 575400,
     COOR_Y: 4775900
   },
@@ -3868,7 +3868,7 @@ export const institutos = [
     TEL1: 944280114,
     TFAX: null,
     EMAIL: '014200aa@hezkuntza.net',
-    PAGINA: 'http://www.eskurtze.net',
+    PAGINA: 'https://eskurtze.hezkuntza.net/es/',
     COOR_X: 504918.728581036,
     COOR_Y: 4788803.81283315
   },
@@ -3892,7 +3892,7 @@ export const institutos = [
     TEL1: 944333305,
     TFAX: 944331893,
     EMAIL: '014205aa@hezkuntza.net',
-    PAGINA: 'http://www.emiliocampuzano.hezkuntza.net/web/guest',
+    PAGINA: 'https://www.atxuri.net/',
     COOR_X: 506346.554241807,
     COOR_Y: 4789143.833622902
   },
@@ -3988,7 +3988,7 @@ export const institutos = [
     TEL1: 944069000,
     TFAX: 944069001,
     EMAIL: '014301aa@hezkuntza.net',
-    PAGINA: 'http://www.fadura.hezkuntza.net',
+    PAGINA: 'https://www.fadura.eus/',
     COOR_X: 499739.835366615,
     COOR_Y: 4800013.331168111
   },
@@ -4228,7 +4228,7 @@ export const institutos = [
     TEL1: 944287920,
     TFAX: 944287921,
     EMAIL: '014466aa@hezkuntza.net',
-    PAGINA: 'http://www.txorierribhi.com',
+    PAGINA: 'https://politeknikatxorierri.eus/',
     COOR_X: 509499.921771659,
     COOR_Y: 4793155.087143849
   },
@@ -5093,7 +5093,7 @@ export const institutos = [
     TEL1: 944541421,
     TFAX: 944540162,
     EMAIL: '014949aa@hezkuntza.net',
-    PAGINA: 'http://www.hazi.eus/es/formacion.html',
+    PAGINA: 'https://www.nekaderio.eus/es/',
     COOR_X: 510281.034110135,
     COOR_Y: 4793345.948294614
   },
@@ -5117,7 +5117,7 @@ export const institutos = [
     TEL1: 944668800,
     TFAX: 946202828,
     EMAIL: '014950aa@hezkuntza.net',
-    PAGINA: 'http://www.iurreta-institutua.hezkuntza.net/web/guest',
+    PAGINA: 'https://www.iurretalhi.eus/es/',
     COOR_X: 529578.3217489,
     COOR_Y: 4780700.032334235
   },
@@ -6947,9 +6947,9 @@ export const institutos = [
     TEL1: '943316900',
     TFAX: '943316482',
     EMAIL: 'cdea@cdea.es',
-    PAGINA: 'https://www.cdea.es/',
+    PAGINA: 'https://www.cebanc.com/',
     COOR_X: 582000,
-    COOR_Y: 4796500
+    COOR_Y: 4796300
   },
   {
     CCEN: 14899,
@@ -7225,12 +7225,10 @@ export const institutos = [
   TEL1: '946640079',
   TFAX: null,
   EMAIL: 'meatzaldea@meatzaldea.eus',
-  PAGINA: 'https://www.meatzaldea.eus/',
+  PAGINA: 'https://cfpbmeatzaldea.org/',
   COOR_X: 495900,
   COOR_Y: 4795000
 },
-
-// ✅ Centro 12727 (CPFBP Deikagest Errenteria) - NO EXISTE, AÑADIR:
 {
   CCEN: 12727,
   NOM: 'Deikagest Errenteria',
@@ -7251,7 +7249,7 @@ export const institutos = [
   TEL1: '943510067',
   TFAX: null,
   EMAIL: 'info@deikagest.com',
-  PAGINA: 'https://www.deikagest.com/',
+  PAGINA: 'https://www.fpberrenteria.eus/',
   COOR_X: 588200,
   COOR_Y: 4796400
 },
